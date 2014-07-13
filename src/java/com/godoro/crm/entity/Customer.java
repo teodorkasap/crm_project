@@ -46,6 +46,18 @@ public class Customer {
     private boolean corporateClient;
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Contact> contactList;
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Participant> participantList;
+
+    public List<Participant> getParticipantList() {
+        return participantList;
+    }
+
+    public void setParticipantList(List<Participant> participantList) {
+        this.participantList = participantList;
+    }
+    
+    
 
     public List<Contact> getContactList() {
         return contactList;

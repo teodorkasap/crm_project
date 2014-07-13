@@ -33,5 +33,37 @@ public class Participant {
     @ManyToOne @JoinColumn(name= "customerId")
     private Customer customer;
 
+    public long getParticipanttId() {
+        return participanttId;
+    }
+
+    public void setParticipanttId(long participanttId) {
+        this.participanttId = participanttId;
+    }
+
+    public String getParticipantName() {
+        return participantName;
+    }
+
+    public void setParticipantName(String participantName) {
+        this.participantName = participantName;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
     
 }

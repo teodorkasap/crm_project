@@ -40,7 +40,19 @@ public class Employee {
     
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     private List<Product> productList;
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    private List<Participant> participantList;
 
+    public List<Participant> getParticipantList() {
+        return participantList;
+    }
+
+    public void setParticipantList(List<Participant> participantList) {
+        this.participantList = participantList;
+    }
+
+    
+    
     public List<Product> getProductList() {
         return productList;
     }
