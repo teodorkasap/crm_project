@@ -28,6 +28,9 @@ public class User {
     private String userName;
     @Column(name="userPassword")
     private String userPassword;
+    @Column(name="userEmail")
+    private String userEmail;
+    
     
 
     public long getUserId() {
@@ -53,6 +56,15 @@ public class User {
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
     }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
     
     
 
