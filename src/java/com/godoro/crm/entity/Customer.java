@@ -39,6 +39,8 @@ public class Customer {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Product> productList;
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Project> projectList;
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Event> eventList;
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Correspondence> correspondenceList;
@@ -136,4 +138,13 @@ public class Customer {
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
+
+    public List<Project> getProjectList() {
+        return projectList;
+    }
+
+    public void setProjectList(List<Project> projectList) {
+        this.projectList = projectList;
+    }
+    
 }

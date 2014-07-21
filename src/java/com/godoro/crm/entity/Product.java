@@ -32,6 +32,8 @@ public class Product {
     private Employee employee;
     @ManyToOne @JoinColumn(name= "customerId")
     private Customer customer;
+    @ManyToOne @JoinColumn(name= "projectId")
+    private Project project;
     @Column(name = "productName", length = 100, nullable = false)
     private String productName;
     @Column(name = "salesPrice")
@@ -77,6 +79,14 @@ public class Product {
 
     public void setSalesPrice(double salesPrice) {
         this.salesPrice = salesPrice;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
     
     
