@@ -29,7 +29,7 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customerId")
-    private long customertId;
+    private long customerId;
     @Column(name = "customerName", length = 100, nullable = false)
     private String customerName;
     @Column(name = "generatedRevenue")
@@ -106,11 +106,11 @@ public class Customer {
    
 
     public long getCustomertId() {
-        return customertId;
+        return customerId;
     }
 
     public void setCustomertId(long customertId) {
-        this.customertId = customertId;
+        this.customerId = customertId;
     }
 
     public String getCustomerName() {
