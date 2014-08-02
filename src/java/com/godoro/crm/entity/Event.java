@@ -16,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -49,10 +51,9 @@ public class Event {
     
     @Column(name = "eventName", length = 100, nullable = false)
     private String eventName;
-    @Column(name = "eventTime")
-    private double eventTime;
-    @Column(name = "eventDate")
-    private double eventDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "DATETIME_FIELD")
+    private java.util.Date dateTimeField; 
     @Column(name = "eventNote", length = 600, nullable = true)
     private String eventNote;
 
@@ -88,21 +89,7 @@ public class Event {
         this.eventName = eventName;
     }
 
-    public double getEventTime() {
-        return eventTime;
-    }
-
-    public void setEventTime(double eventTime) {
-        this.eventTime = eventTime;
-    }
-
-    public double getEventDate() {
-        return eventDate;
-    }
-
-    public void setEventDate(double eventDate) {
-        this.eventDate = eventDate;
-    }
+    
 
     public String getEventNote() {
         return eventNote;
