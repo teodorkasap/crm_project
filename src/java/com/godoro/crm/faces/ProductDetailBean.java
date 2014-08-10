@@ -28,6 +28,48 @@ public class ProductDetailBean {
     private List<Employee> employeeList;
     private long selectedCustomerId;
     private long selectedEmployeeId;
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public List<Customer> getCustomerList() {
+        return customerList;
+    }
+
+    public void setCustomerList(List<Customer> customerList) {
+        this.customerList = customerList;
+    }
+
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
+    }
+
+    public long getSelectedCustomerId() {
+        return selectedCustomerId;
+    }
+
+    public void setSelectedCustomerId(long selectedCustomerId) {
+        this.selectedCustomerId = selectedCustomerId;
+    }
+
+    public long getSelectedEmployeeId() {
+        return selectedEmployeeId;
+    }
+
+    public void setSelectedEmployeeId(long selectedEmployeeId) {
+        this.selectedEmployeeId = selectedEmployeeId;
+    }
+    
+    
     
 
     /**
