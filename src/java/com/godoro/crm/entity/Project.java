@@ -42,6 +42,8 @@ public class Project {
     private List<Product> productList;
     @Column(name = "projectDetail", length = 500, nullable = true)
     private String projectDetail;
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    private List<Correspondence> correspondenceList;
 
     public long getProjectId() {
         return projectId;

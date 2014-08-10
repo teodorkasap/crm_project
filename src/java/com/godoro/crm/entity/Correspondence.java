@@ -32,6 +32,8 @@ public class Correspondence {
     @ManyToOne
     @JoinColumn(name = "customerId")
     private Customer customer;
+    @JoinColumn(name = "projectId")
+    private Project project;
     @Column(name = "correspondenceName", length = 100, nullable = false)
     private String correspondenceName;
     @Column(name = "correspondenceTime")
@@ -41,4 +43,70 @@ public class Correspondence {
     @Column(name = "correspondenceNote", length = 10000, nullable = true)
     private String correspondenceNote;
 
+    public long getCorrespondenceId() {
+        return correspondenceId;
+    }
+
+    public void setCorrespondenceId(long correspondenceId) {
+        this.correspondenceId = correspondenceId;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public String getCorrespondenceName() {
+        return correspondenceName;
+    }
+
+    public void setCorrespondenceName(String correspondenceName) {
+        this.correspondenceName = correspondenceName;
+    }
+
+    public double getCorrespondenceTime() {
+        return correspondenceTime;
+    }
+
+    public void setCorrespondenceTime(double correspondenceTime) {
+        this.correspondenceTime = correspondenceTime;
+    }
+
+    public double getCorrespondenceDate() {
+        return correspondenceDate;
+    }
+
+    public void setCorrespondenceDate(double correspondenceDate) {
+        this.correspondenceDate = correspondenceDate;
+    }
+
+    public String getCorrespondenceNote() {
+        return correspondenceNote;
+    }
+
+    public void setCorrespondenceNote(String correspondenceNote) {
+        this.correspondenceNote = correspondenceNote;
+    }
+
+    
+    
 }
