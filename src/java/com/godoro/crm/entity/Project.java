@@ -44,6 +44,26 @@ public class Project {
     private String projectDetail;
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private List<Correspondence> correspondenceList;
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    private List<HashTag> hashTagList;
+
+    public List<Correspondence> getCorrespondenceList() {
+        return correspondenceList;
+    }
+
+    public void setCorrespondenceList(List<Correspondence> correspondenceList) {
+        this.correspondenceList = correspondenceList;
+    }
+
+    public List<HashTag> getHashTagList() {
+        return hashTagList;
+    }
+
+    public void setHashTagList(List<HashTag> hashTagList) {
+        this.hashTagList = hashTagList;
+    }
+    
+    
 
     public long getProjectId() {
         return projectId;

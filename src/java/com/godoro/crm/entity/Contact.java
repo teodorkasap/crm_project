@@ -6,6 +6,8 @@
 
 package com.godoro.crm.entity;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -34,10 +37,22 @@ public class Contact {
     private String contactAddress;
     @Column(name = "contactTel", length = 100, nullable = false)
     private String contactTel;
+    @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL)
+    private List<HashTag> hashTagList;
     
     
     @ManyToOne @JoinColumn(name= "customerId")
     private Customer customer;
+
+    public List<HashTag> getHashTagList() {
+        return hashTagList;
+    }
+
+    public void setHashTagList(List<HashTag> hashTagList) {
+        this.hashTagList = hashTagList;
+    }
+    
+    
 
     public long getContactId() {
         return contactId;

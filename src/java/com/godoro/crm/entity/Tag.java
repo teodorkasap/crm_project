@@ -31,5 +31,31 @@ public class Tag {
     private String tagContent; 
     @ManyToOne @JoinColumn(name= "hashTagId")
     private HashTag hashTag;
+
+    public long getTagId() {
+        return tagId;
+    }
+
+    public void setTagId(long tagId) {
+        this.tagId = tagId;
+    }
+
+    public String getTagContent() {
+        return tagContent;
+    }
+
+    public void setTagContent(String tagContent) {
+        this.tagContent = tagContent;
+    }
+
+    public HashTag getHashTag() {
+        return hashTag;
+    }
+
+    public void setHashTag(HashTag hashTag) {
+        this.hashTag = hashTag;
+    }
+    
+    
     
 }

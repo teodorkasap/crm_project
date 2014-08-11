@@ -5,6 +5,7 @@
  */
 package com.godoro.crm.entity;
 
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -39,6 +40,25 @@ public class Event {
     private Customer customer;
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<Location> locationList;
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    private List<HashTag> hashTagList;
+
+    public List<HashTag> getHashTagList() {
+        return hashTagList;
+    }
+
+    public void setHashTagList(List<HashTag> hashTagList) {
+        this.hashTagList = hashTagList;
+    }
+
+    public Date getDateTimeField() {
+        return dateTimeField;
+    }
+
+    public void setDateTimeField(Date dateTimeField) {
+        this.dateTimeField = dateTimeField;
+    }
+    
 
     public List<Location> getLocationList() {
         return locationList;

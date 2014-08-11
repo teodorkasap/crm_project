@@ -5,6 +5,8 @@
  */
 package com.godoro.crm.entity;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -42,6 +45,19 @@ public class Correspondence {
     private double correspondenceDate;
     @Column(name = "correspondenceNote", length = 10000, nullable = true)
     private String correspondenceNote;
+    
+    @OneToMany(mappedBy = "correspondence", cascade = CascadeType.ALL)
+    private List<HashTag> hashTagList;
+
+    public List<HashTag> getHashTagList() {
+        return hashTagList;
+    }
+
+    public void setHashTagList(List<HashTag> hashTagList) {
+        this.hashTagList = hashTagList;
+    }
+    
+    
 
     public long getCorrespondenceId() {
         return correspondenceId;
