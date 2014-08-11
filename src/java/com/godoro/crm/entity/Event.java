@@ -32,9 +32,8 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "eventId")
     private long eventId;
-    @ManyToOne
-    @JoinColumn(name = "employeeId")
-    private Employee employee;
+    
+    
     @ManyToOne
     @JoinColumn(name = "customerId")
     private Customer customer;
@@ -43,6 +42,19 @@ public class Event {
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<HashTag> hashTagList;
 
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    private List<Participant> participantList;
+
+    public List<Participant> getParticipantList() {
+        return participantList;
+    }
+
+    public void setParticipantList(List<Participant> participantList) {
+        this.participantList = participantList;
+    }
+    
+    
+    
     public List<HashTag> getHashTagList() {
         return hashTagList;
     }
@@ -85,13 +97,7 @@ public class Event {
         this.eventId = eventId;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
+   
 
     public Customer getCustomer() {
         return customer;
