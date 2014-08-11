@@ -11,6 +11,7 @@ import com.godoro.crm.entity.Correspondence;
 import com.godoro.crm.entity.Customer;
 import com.godoro.crm.entity.Employee;
 import com.godoro.crm.entity.Event;
+import com.godoro.crm.entity.HashTag;
 import com.godoro.crm.entity.Product;
 import com.godoro.crm.entity.Project;
 import com.godoro.crm.repository.CustomerRepository;
@@ -35,6 +36,17 @@ public class CustomerDetailBean {
     private List<Event> eventList;
     private List<Correspondence> correspondenceList;
     private List<Contact> contactList;
+    private List<HashTag> hashTagList;
+
+    public List<HashTag> getHashTagList() {
+        return hashTagList;
+    }
+
+    public void setHashTagList(List<HashTag> hashTagList) {
+        this.hashTagList = hashTagList;
+    }
+    
+    
 
     public Customer getCustomer() {
         return customer;

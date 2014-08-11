@@ -8,8 +8,10 @@ package com.godoro.crm.faces;
 
 import com.godoro.crm.entity.Contact;
 import com.godoro.crm.entity.Employee;
+import com.godoro.crm.entity.HashTag;
 import com.godoro.crm.repository.ContactRepository;
 import com.godoro.crm.repository.EmployeeRepository;
+import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -24,6 +26,17 @@ import javax.servlet.http.HttpServletRequest;
 public class ContactDetailBean {
     
     private Contact contact;
+    private List<HashTag> hashTagList;
+
+    public List<HashTag> getHashTagList() {
+        return hashTagList;
+    }
+
+    public void setHashTagList(List<HashTag> hashTagList) {
+        this.hashTagList = hashTagList;
+    }
+    
+    
 
     public Contact getContact() {
         return contact;
