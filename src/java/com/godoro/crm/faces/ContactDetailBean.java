@@ -7,10 +7,12 @@
 package com.godoro.crm.faces;
 
 import com.godoro.crm.entity.Contact;
-import com.godoro.crm.entity.Employee;
+import com.godoro.crm.entity.Customer;
 import com.godoro.crm.entity.HashTag;
+import com.godoro.crm.entity.Project;
 import com.godoro.crm.repository.ContactRepository;
-import com.godoro.crm.repository.EmployeeRepository;
+import com.godoro.crm.repository.CustomerRepository;
+import com.godoro.crm.repository.ProjectRepository;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
@@ -27,13 +29,51 @@ public class ContactDetailBean {
     
     private Contact contact;
     private List<HashTag> hashTagList;
+    private long selectedHashTagId;
+    private List<Customer> customerList;
+    private long selectedCustomerId;
+   
+
+    
+
+    
+    
+
+    public List<Customer> getCustomerList() {
+        return customerList;
+    }
+
+    public void setCustomerList(List<Customer> customerList) {
+        this.customerList = customerList;
+    }
+
+    public long getSelectedCustomerId() {
+        return selectedCustomerId;
+    }
+
+    public void setSelectedCustomerId(long selectedCustomerId) {
+        this.selectedCustomerId = selectedCustomerId;
+    }
+    
+    
+    
 
     public List<HashTag> getHashTagList() {
         return hashTagList;
     }
+    
+    
 
     public void setHashTagList(List<HashTag> hashTagList) {
         this.hashTagList = hashTagList;
+    }
+
+    public long getSelectedHashTagId() {
+        return selectedHashTagId;
+    }
+
+    public void setSelectedHashTagId(long selectedHashTagId) {
+        this.selectedHashTagId = selectedHashTagId;
     }
     
     
@@ -72,6 +112,32 @@ public class ContactDetailBean {
             contact = contactRepository.find(contactId);
             contactRepository.close();
         
+    }
+    public void save() {
+        HttpServletRequest request = (HttpServletRequest) FacesContext
+                .getCurrentInstance().getExternalContext().getRequest();
+
+        long contactId = 0;
+
+        if (request.getParameter("contactId") != null) {
+            contactId = Long.parseLong(request.getParameter("contactId"));
+        }
+        System.out.println("Secilen Müşteri kimliği " + selectedCustomerId);
+        if (selectedCustomerId != 0) {
+
+            CustomerRepository customerRepository = new CustomerRepository();
+            Customer customer = customerRepository.find(selectedCustomerId);
+            customerRepository.close();
+            contact.setCustomer(customer);
+        }
+        
+        ContactRepository contactRepository = new ContactRepository();
+        if (contactId == 0) {
+            contactRepository.persist(contact);
+        } else {
+            contactRepository.merge(contact);
+        }
+        contactRepository.close();
     }
     
 }
