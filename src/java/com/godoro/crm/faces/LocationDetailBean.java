@@ -35,7 +35,7 @@ public class LocationDetailBean {
      */
     public LocationDetailBean() {
         
-         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+             HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
     
         long locationId = 0;
         if (request.getParameter("locationId") != null) {
@@ -53,7 +53,7 @@ public class LocationDetailBean {
         
             LocationRepository locationRepository = new LocationRepository();
             location = locationRepository.find(locationId);
-            locationRepository.close();
+            locationRepository.close(); 
     }
     
     

@@ -15,6 +15,7 @@ import com.godoro.crm.entity.Location;
 import com.godoro.crm.entity.Participant;
 import com.godoro.crm.repository.EventRepository;
 import com.godoro.crm.repository.LocationRepository;
+import com.godoro.crm.repository.ParticipantRepository;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
@@ -158,7 +159,7 @@ public class EventDetailBean {
         if (request.getParameter("eventId") != null) {
             eventId = Long.parseLong(request.getParameter("eventId"));
         }
-        System.out.println("Secilen Okul kimligi " + selectedLocationId);
+        System.out.println("Secilen Toplanti Yeri kimligi " + selectedLocationId);
         if (selectedLocationId != 0) {
 
             LocationRepository locationRepository = new LocationRepository();
@@ -166,6 +167,15 @@ public class EventDetailBean {
             locationRepository.close();
             event.setLocation(location);
         }
+         System.out.println("Secilen Toplanti Katilimci kimligi " + selectedParticipantId);
+        if (selectedParticipantId != 0) {
+
+            ParticipantRepository participantRepository = new ParticipantRepository();
+            Participant participant = participantRepository.find(selectedParticipantId);
+            participantRepository.close();
+            event.setParticipant(participant);
+        }
+        
         EventRepository eventRepository = new EventRepository();
         if (eventId == 0) {
             eventRepository.persist(event);

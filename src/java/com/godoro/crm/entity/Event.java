@@ -43,16 +43,19 @@ public class Event {
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<HashTag> hashTagList;
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
-    private List<Participant> participantList;
+    @ManyToOne
+    @JoinColumn(name = "participantId")
+    private Participant participant;
 
-    public List<Participant> getParticipantList() {
-        return participantList;
+    public Participant getParticipant() {
+        return participant;
     }
 
-    public void setParticipantList(List<Participant> participantList) {
-        this.participantList = participantList;
+    public void setParticipant(Participant participant) {
+        this.participant = participant;
     }
+
+    
     
     
     

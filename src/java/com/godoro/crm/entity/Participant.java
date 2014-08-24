@@ -31,41 +31,45 @@ public class Participant {
     private long participanttId;
     @Column(name = "participantName", length = 100, nullable = false)
     private String participantName;
-    @ManyToOne @JoinColumn(name= "eventId")
-    private Event event;
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    private List<Event> eventList;
     @ManyToOne @JoinColumn(name= "customerId")
     private Customer customer;  
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
-    private List<Contact> contactList;
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
-    private List<Employee> employeeList;
+    @ManyToOne @JoinColumn(name= "contactId")
+    private Contact contact;  
+    @ManyToOne @JoinColumn(name= "employeeId")
+    private Employee employee;  
 
-    public List<Contact> getContactList() {
-        return contactList;
+    public Contact getContact() {
+        return contact;
     }
 
-    public void setContactList(List<Contact> contactList) {
-        this.contactList = contactList;
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
 
-    public List<Employee> getEmployeeList() {
-        return employeeList;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setEmployeeList(List<Employee> employeeList) {
-        this.employeeList = employeeList;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    
+
+    public List<Event> getEventList() {
+        return eventList;
+    }
+
+    public void setEventList(List<Event> eventList) {
+        this.eventList = eventList;
     }
     
     
     
 
-    public Event getEvent() {
-        return event;
-    }
-
-    public void setEvent(Event event) {
-        this.event = event;
-    }
+    
     
     
 
