@@ -122,11 +122,11 @@ public class CustomerDetailBean {
     }
 
     public long getSelectedprojectId() {
-        return selectedprojectId;
+        return selectedProjectId;
     }
 
     public void setSelectedprojectId(long selectedprojectId) {
-        this.selectedprojectId = selectedprojectId;
+        this.selectedProjectId = selectedprojectId;
     }
 
     public long getSelectedProductId() {
@@ -218,14 +218,7 @@ public class CustomerDetailBean {
             employeeRepository.close();
             customer.setEmployee(employee);
         }
-        System.out.println("Secilen Proje kimligi " + selectedProjectId);
-        if (selectedProjectId != 0) {
-
-            ProjectRepository projectRepository = new ProjectRepository();
-            Project project = projectRepository.find(selectedProjectId);
-            projectRepository.close();
-            customer.setProject(project);
-        }
+        
         CustomerRepository customerRepository = new CustomerRepository();
         if (customerId == 0) {
             customerRepository.persist(customer);

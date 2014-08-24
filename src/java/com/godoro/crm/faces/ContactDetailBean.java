@@ -7,8 +7,10 @@
 package com.godoro.crm.faces;
 
 import com.godoro.crm.entity.Contact;
+import com.godoro.crm.entity.Correspondence;
 import com.godoro.crm.entity.Customer;
 import com.godoro.crm.entity.HashTag;
+import com.godoro.crm.entity.Participant;
 import com.godoro.crm.entity.Project;
 import com.godoro.crm.repository.ContactRepository;
 import com.godoro.crm.repository.CustomerRepository;
@@ -32,9 +34,12 @@ public class ContactDetailBean {
     private long selectedHashTagId;
     private List<Customer> customerList;
     private long selectedCustomerId;
-   
-
+    private List<Participant> participantList;
+    private long selectedParticpantId;
+    private List<Correspondence> correspondenceList;
+    private long selectedCorrespondenceId;
     
+   
 
     
     
@@ -84,6 +89,38 @@ public class ContactDetailBean {
 
     public void setContact(Contact contact) {
         this.contact = contact;
+    }
+
+    public List<Participant> getParticipantList() {
+        return participantList;
+    }
+
+    public void setParticipantList(List<Participant> participantList) {
+        this.participantList = participantList;
+    }
+
+    public long getSelectedParticpantId() {
+        return selectedParticpantId;
+    }
+
+    public void setSelectedParticpantId(long selectedParticpantId) {
+        this.selectedParticpantId = selectedParticpantId;
+    }
+
+    public List<Correspondence> getCorrespondenceList() {
+        return correspondenceList;
+    }
+
+    public void setCorrespondenceList(List<Correspondence> correspondenceList) {
+        this.correspondenceList = correspondenceList;
+    }
+
+    public long getSelectedCorrespondenceId() {
+        return selectedCorrespondenceId;
+    }
+
+    public void setSelectedCorrespondenceId(long selectedCorrespondenceId) {
+        this.selectedCorrespondenceId = selectedCorrespondenceId;
     }
     
     

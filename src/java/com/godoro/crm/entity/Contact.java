@@ -39,6 +39,10 @@ public class Contact {
     private String contactTel;
     @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL)
     private List<HashTag> hashTagList;
+    @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL)
+    private List<Participant> participantList;
+    @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL)
+    private List<Correspondence> correspondenceList;
     
     
     @ManyToOne @JoinColumn(name= "customerId")

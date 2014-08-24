@@ -37,8 +37,9 @@ public class Event {
     @ManyToOne
     @JoinColumn(name = "customerId")
     private Customer customer;
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
-    private List<Location> locationList;
+    @ManyToOne
+    @JoinColumn(name = "locationId")
+    private Location location;
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<HashTag> hashTagList;
 
@@ -72,14 +73,7 @@ public class Event {
     }
     
 
-    public List<Location> getLocationList() {
-        return locationList;
-    }
-
-    public void setLocationList(List<Location> locationList) {
-        this.locationList = locationList;
-    }
-
+    
     
     @Column(name = "eventName", length = 100, nullable = false)
     private String eventName;
@@ -123,6 +117,14 @@ public class Event {
 
     public void setEventNote(String eventNote) {
         this.eventNote = eventNote;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
     
     

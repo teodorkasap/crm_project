@@ -6,6 +6,8 @@
 
 package com.godoro.crm.entity;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -21,7 +24,7 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "Event")
+@Table(name = "Location")
 public class Location {
     
     @Id
@@ -30,9 +33,8 @@ public class Location {
     private long locationId;
     @Column(name = "locationName", length = 100, nullable = false)
     private String locationName;
-    @ManyToOne
-    @JoinColumn(name = "eventId")
-    private Event event;
+    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
+    private List<Event> eventList;
     @Column(name = "locationDescription", length = 500, nullable = true)
     private String locationDescription;
 
@@ -52,13 +54,15 @@ public class Location {
         this.locationName = locationName;
     }
 
-    public Event getEvent() {
-        return event;
+    public List<Event> getEventList() {
+        return eventList;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
+    public void setEventList(List<Event> eventList) {
+        this.eventList = eventList;
     }
+
+    
 
     public String getLocationDescription() {
         return locationDescription;

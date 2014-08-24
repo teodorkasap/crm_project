@@ -12,8 +12,10 @@ import com.godoro.crm.entity.Event;
 import com.godoro.crm.entity.Participant;
 import com.godoro.crm.entity.Product;
 import com.godoro.crm.entity.Project;
+import com.godoro.crm.entity.User;
 import com.godoro.crm.repository.CustomerRepository;
 import com.godoro.crm.repository.EmployeeRepository;
+import com.godoro.crm.repository.UserRepository;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
@@ -29,9 +31,16 @@ import javax.servlet.http.HttpServletRequest;
 public class EmployeeDetailBean {
     private Employee employee;
     private List<Customer> customerList;
+    private long selectedCustomerId;
     private List<Event> eventList;
+    private long selectedEventId;
     private List<Product> productList;
+    private long selectedProductId;
     private List<Project> projectList;
+    private long selectedProjectId;
+    private List<User> userList;
+    private long selectedUserId;
+    
 
     public Employee getEmployee() {
         return employee;
@@ -72,6 +81,54 @@ public class EmployeeDetailBean {
     public void setProjectList(List<Project> projectList) {
         this.projectList = projectList;
     }
+
+    public long getSelectedCustomerId() {
+        return selectedCustomerId;
+    }
+
+    public void setSelectedCustomerId(long selectedCustomerId) {
+        this.selectedCustomerId = selectedCustomerId;
+    }
+
+    public long getSelectedEventId() {
+        return selectedEventId;
+    }
+
+    public void setSelectedEventId(long selectedEventId) {
+        this.selectedEventId = selectedEventId;
+    }
+
+    public long getSelectedProductId() {
+        return selectedProductId;
+    }
+
+    public void setSelectedProductId(long selectedProductId) {
+        this.selectedProductId = selectedProductId;
+    }
+
+    public long getSelectedProjectId() {
+        return selectedProjectId;
+    }
+
+    public void setSelectedProjectId(long selectedProjectId) {
+        this.selectedProjectId = selectedProjectId;
+    }
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
+
+    public long getSelectedUserId() {
+        return selectedUserId;
+    }
+
+    public void setSelectedUserId(long selectedUserId) {
+        this.selectedUserId = selectedUserId;
+    }
     
     
 
@@ -100,5 +157,33 @@ public class EmployeeDetailBean {
             employee = employeeRepository.find(employeeId);
             employeeRepository.close();
     }
+    
+    public void save() {
+        HttpServletRequest request = (HttpServletRequest) FacesContext
+                .getCurrentInstance().getExternalContext().getRequest();
+
+        long employeeId = 0;
+
+        if (request.getParameter("employeeId") != null) {
+            employeeId = Long.parseLong(request.getParameter("employeeId"));
+        }
+        System.out.println("Secilen Okul kimligi " + selectedUserId);
+        if (selectedUserId != 0) {
+
+            UserRepository userRepository = new UserRepository();
+            User user = userRepository.find(selectedUserId);
+            userRepository.close();
+            employee.setUser(user);
+        
+        EmployeeRepository employeeRepository = new EmployeeRepository();
+        if (employeeId == 0) {
+            employeeRepository.persist(employee);
+        } else {
+            employeeRepository.merge(employee);
+        }
+        employeeRepository.close();
+    }
+    } 
+        
     
 }

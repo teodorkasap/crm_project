@@ -45,6 +45,8 @@ public class Correspondence {
     private double correspondenceDate;
     @Column(name = "correspondenceNote", length = 10000, nullable = true)
     private String correspondenceNote;
+    @ManyToOne
+    @JoinColumn(name = "contactId")
     
     @OneToMany(mappedBy = "correspondence", cascade = CascadeType.ALL)
     private List<HashTag> hashTagList;
