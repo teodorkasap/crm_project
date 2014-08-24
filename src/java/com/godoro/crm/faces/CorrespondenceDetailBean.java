@@ -39,6 +39,78 @@ public class CorrespondenceDetailBean {
     private long selectedCustomerId;
     private List<Contact> contactList;
     private long selectedContactId;
+
+    public Correspondence getCorrespondence() {
+        return correspondence;
+    }
+
+    public void setCorrespondence(Correspondence correspondence) {
+        this.correspondence = correspondence;
+    }
+
+    public List<HashTag> getHashTagList() {
+        return hashTagList;
+    }
+
+    public void setHashTagList(List<HashTag> hashTagList) {
+        this.hashTagList = hashTagList;
+    }
+
+    public long getSelectedHashTagId() {
+        return selectedHashTagId;
+    }
+
+    public void setSelectedHashTagId(long selectedHashTagId) {
+        this.selectedHashTagId = selectedHashTagId;
+    }
+
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
+    }
+
+    public long getSelectedEmployeeId() {
+        return selectedEmployeeId;
+    }
+
+    public void setSelectedEmployeeId(long selectedEmployeeId) {
+        this.selectedEmployeeId = selectedEmployeeId;
+    }
+
+    public List<Customer> getCustomerList() {
+        return customerList;
+    }
+
+    public void setCustomerList(List<Customer> customerList) {
+        this.customerList = customerList;
+    }
+
+    public long getSelectedCustomerId() {
+        return selectedCustomerId;
+    }
+
+    public void setSelectedCustomerId(long selectedCustomerId) {
+        this.selectedCustomerId = selectedCustomerId;
+    }
+
+    public List<Contact> getContactList() {
+        return contactList;
+    }
+
+    public void setContactList(List<Contact> contactList) {
+        this.contactList = contactList;
+    }
+
+    public long getSelectedContactId() {
+        return selectedContactId;
+    }
+
+    public void setSelectedContactId(long selectedContactId) {
+        this.selectedContactId = selectedContactId;
+    }
     
     
     
