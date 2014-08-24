@@ -47,10 +47,21 @@ public class Correspondence {
     private String correspondenceNote;
     @ManyToOne
     @JoinColumn(name = "contactId")
+    private Contact contact;
     
     @OneToMany(mappedBy = "correspondence", cascade = CascadeType.ALL)
     private List<HashTag> hashTagList;
 
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
+    
+    
     public List<HashTag> getHashTagList() {
         return hashTagList;
     }
@@ -85,6 +96,7 @@ public class Correspondence {
         this.customer = customer;
     }
 
+    
     public Project getProject() {
         return project;
     }
