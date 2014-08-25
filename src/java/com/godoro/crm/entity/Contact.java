@@ -37,8 +37,8 @@ public class Contact {
     private String contactAddress;
     @Column(name = "contactTel", length = 100, nullable = false)
     private String contactTel;
-    @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL)
-    private List<HashTag> hashTagList;
+    @ManyToOne @JoinColumn(name= "hashTagId")
+    private HashTag hashTag;
     @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL)
     private List<Participant> participantList;
     @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL)
@@ -48,13 +48,31 @@ public class Contact {
     @ManyToOne @JoinColumn(name= "customerId")
     private Customer customer;
 
-    public List<HashTag> getHashTagList() {
-        return hashTagList;
+    public HashTag getHashTag() {
+        return hashTag;
     }
 
-    public void setHashTagList(List<HashTag> hashTagList) {
-        this.hashTagList = hashTagList;
+    public void setHashTag(HashTag hashTag) {
+        this.hashTag = hashTag;
     }
+
+    public List<Participant> getParticipantList() {
+        return participantList;
+    }
+
+    public void setParticipantList(List<Participant> participantList) {
+        this.participantList = participantList;
+    }
+
+    public List<Correspondence> getCorrespondenceList() {
+        return correspondenceList;
+    }
+
+    public void setCorrespondenceList(List<Correspondence> correspondenceList) {
+        this.correspondenceList = correspondenceList;
+    }
+
+    
     
     
 

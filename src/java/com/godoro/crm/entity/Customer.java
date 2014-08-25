@@ -50,7 +50,29 @@ public class Customer {
     private List<Contact> contactList;
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Participant> participantList;
+    @ManyToOne @JoinColumn(name= "hashTagId")
+    private HashTag hashTag;
 
+    public long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
+    }
+
+    public HashTag getHashTag() {
+        return hashTag;
+    }
+
+    public void setHashTag(HashTag hashTag) {
+        this.hashTag = hashTag;
+    }
+
+    
+    
+    
+    
     public List<Participant> getParticipantList() {
         return participantList;
     }

@@ -49,8 +49,9 @@ public class Correspondence {
     @JoinColumn(name = "contactId")
     private Contact contact;
     
-    @OneToMany(mappedBy = "correspondence", cascade = CascadeType.ALL)
-    private List<HashTag> hashTagList;
+    @ManyToOne
+    @JoinColumn(name = "hashTagId")
+    private HashTag hashTag;
 
     public Contact getContact() {
         return contact;
@@ -60,15 +61,17 @@ public class Correspondence {
         this.contact = contact;
     }
 
-    
-    
-    public List<HashTag> getHashTagList() {
-        return hashTagList;
+    public HashTag getHashTag() {
+        return hashTag;
     }
 
-    public void setHashTagList(List<HashTag> hashTagList) {
-        this.hashTagList = hashTagList;
+    public void setHashTag(HashTag hashTag) {
+        this.hashTag = hashTag;
     }
+
+    
+    
+    
     
     
 

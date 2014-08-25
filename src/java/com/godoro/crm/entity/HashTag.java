@@ -33,24 +33,46 @@ public class HashTag {
     private String hashTagContent; 
     @OneToMany(mappedBy = "hashTag", cascade = CascadeType.ALL)
     private List<Tag> tagList;
-    @ManyToOne @JoinColumn(name= "customerId")
-    private Customer customer;
-    @ManyToOne @JoinColumn(name= "projectId")
-    private Project project;
-    @ManyToOne @JoinColumn(name= "productId")
-    private Product product;
-    @ManyToOne @JoinColumn(name= "correspondenceId")
-    private Correspondence correspondence;
-    @ManyToOne @JoinColumn(name= "eventId")
-    private Event event;
+    @OneToMany(mappedBy = "hashTag", cascade = CascadeType.ALL)
+    private List<Customer> customerList;
+    @OneToMany(mappedBy = "hashTag", cascade = CascadeType.ALL)
+    private List<Project> projectList;
+    @OneToMany(mappedBy = "hashTag", cascade = CascadeType.ALL)
+    private List<Product> productList;
+    @OneToMany(mappedBy = "hashTag", cascade = CascadeType.ALL)
+    private List<Correspondence> correspondenceList;
+    
+    
+    @OneToMany(mappedBy = "hashTag", cascade = CascadeType.ALL)
+    private List<Contact> contactList;
 
-    public Event getEvent() {
-        return event;
+    
+    @OneToMany(mappedBy = "hashTag", cascade = CascadeType.ALL)
+    private List<Event> eventList;
+
+    public List<Event> getEventList() {
+        return eventList;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
+    public void setEventList(List<Event> eventList) {
+        this.eventList = eventList;
     }
+    
+    
+    
+    
+    
+    public List<Contact> getContactList() {
+        return contactList;
+    }
+
+    public void setContactList(List<Contact> contactList) {
+        this.contactList = contactList;
+    }
+
+    
+    
+    
     
     
 
@@ -78,37 +100,45 @@ public class HashTag {
         this.tagList = tagList;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public List<Customer> getCustomerList() {
+        return customerList;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomerList(List<Customer> customerList) {
+        this.customerList = customerList;
     }
 
-    public Project getProject() {
-        return project;
+    public List<Project> getProjectList() {
+        return projectList;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setProjectList(List<Project> projectList) {
+        this.projectList = projectList;
     }
 
-    public Product getProduct() {
-        return product;
+    
+
+    
+
+    public List<Product> getProductList() {
+        return productList;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
     }
 
-    public Correspondence getCorrespondence() {
-        return correspondence;
+    
+
+    public List<Correspondence> getCorrespondenceList() {
+        return correspondenceList;
     }
 
-    public void setCorrespondence(Correspondence correspondence) {
-        this.correspondence = correspondence;
+    public void setCorrespondenceList(List<Correspondence> correspondenceList) {
+        this.correspondenceList = correspondenceList;
     }
+
+    
     
     
     

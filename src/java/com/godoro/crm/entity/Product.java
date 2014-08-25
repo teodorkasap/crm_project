@@ -42,16 +42,18 @@ public class Product {
     @Column(name = "salesPrice")
     private double salesPrice;
     
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<HashTag> hashTagList;
+    @ManyToOne @JoinColumn(name= "hashTagId")
+    private HashTag hashTag;
 
-    public List<HashTag> getHashTagList() {
-        return hashTagList;
+    public HashTag getHashTag() {
+        return hashTag;
     }
 
-    public void setHashTagList(List<HashTag> hashTagList) {
-        this.hashTagList = hashTagList;
+    public void setHashTag(HashTag hashTag) {
+        this.hashTag = hashTag;
     }
+
+    
     
     
 

@@ -40,8 +40,10 @@ public class Event {
     @ManyToOne
     @JoinColumn(name = "locationId")
     private Location location;
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
-    private List<HashTag> hashTagList;
+   
+    @ManyToOne
+    @JoinColumn(name = "hashTagId")
+    private HashTag hashTag;
 
     @ManyToOne
     @JoinColumn(name = "participantId")
@@ -55,17 +57,19 @@ public class Event {
         this.participant = participant;
     }
 
-    
-    
-    
-    
-    public List<HashTag> getHashTagList() {
-        return hashTagList;
+    public HashTag getHashTag() {
+        return hashTag;
     }
 
-    public void setHashTagList(List<HashTag> hashTagList) {
-        this.hashTagList = hashTagList;
+    public void setHashTag(HashTag hashTag) {
+        this.hashTag = hashTag;
     }
+
+    
+    
+    
+    
+    
 
     public Date getDateTimeField() {
         return dateTimeField;

@@ -48,6 +48,19 @@ public class Employee {
     private List<Participant> participantList;
     @ManyToOne @JoinColumn(name= "userId")
     private User user;
+    
+    @ManyToOne @JoinColumn(name= "hashTagId")
+    private HashTag hashTag;
+
+    public HashTag getHashTag() {
+        return hashTag;
+    }
+
+    public void setHashTag(HashTag hashTag) {
+        this.hashTag = hashTag;
+    }
+    
+    
 
     public User getUser() {
         return user;
