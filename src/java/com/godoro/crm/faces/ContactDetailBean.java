@@ -14,6 +14,7 @@ import com.godoro.crm.entity.Participant;
 import com.godoro.crm.entity.Project;
 import com.godoro.crm.repository.ContactRepository;
 import com.godoro.crm.repository.CustomerRepository;
+import com.godoro.crm.repository.HashTagRepository;
 import com.godoro.crm.repository.ProjectRepository;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -129,13 +130,14 @@ public class ContactDetailBean {
      * Creates a new instance of ContactDetailBean
      */
     public ContactDetailBean() {
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-    
+        HttpServletRequest request = (HttpServletRequest) FacesContext
+                .getCurrentInstance().getExternalContext().getRequest();
+
         long contactId = 0;
         if (request.getParameter("contactId") != null) {
             contactId = Long.parseLong(request.getParameter("contactId"));
-        }else{
-            if (contactId == 0) {
+        }
+        if (contactId == 0) {
             contact = new Contact();
 
         } else {
@@ -143,11 +145,16 @@ public class ContactDetailBean {
             contact = contactRepository.find(contactId);
             contactRepository.close();
         }
-        }
+
+        CustomerRepository customerRepository = new CustomerRepository();
+        customerList = customerRepository.list();
+        customerRepository.close();
         
-            ContactRepository contactRepository = new ContactRepository();
-            contact = contactRepository.find(contactId);
-            contactRepository.close();
+        HashTagRepository hashTagRepository = new HashTagRepository();
+        hashTagList = hashTagRepository.list();
+        hashTagRepository.close();
+        
+        
         
     }
     public void save() {
@@ -166,6 +173,15 @@ public class ContactDetailBean {
             Customer customer = customerRepository.find(selectedCustomerId);
             customerRepository.close();
             contact.setCustomer(customer);
+        }
+        
+        System.out.println("Secilen Etiketler " + selectedCustomerId);
+        if (selectedCustomerId != 0) {
+
+            HashTagRepository hashTagRepository = new HashTagRepository();
+            HashTag hashTag = hashTagRepository.find(selectedHashTagId);
+            hashTagRepository.close();
+            contact.setHashTag(hashTag);
         }
         
         ContactRepository contactRepository = new ContactRepository();
