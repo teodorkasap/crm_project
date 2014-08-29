@@ -16,6 +16,7 @@ import com.godoro.crm.entity.Product;
 import com.godoro.crm.entity.Project;
 import com.godoro.crm.repository.CustomerRepository;
 import com.godoro.crm.repository.EmployeeRepository;
+import com.godoro.crm.repository.HashTagRepository;
 import com.godoro.crm.repository.ProjectRepository;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -179,13 +180,14 @@ public class CustomerDetailBean {
      */
     public CustomerDetailBean() {
         
-         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-    
+         HttpServletRequest request = (HttpServletRequest) FacesContext
+                .getCurrentInstance().getExternalContext().getRequest();
+
         long customerId = 0;
         if (request.getParameter("customerId") != null) {
             customerId = Long.parseLong(request.getParameter("customerId"));
-        }else{
-            if (customerId == 0) {
+        }
+        if (customerId == 0) {
             customer = new Customer();
 
         } else {
@@ -193,11 +195,14 @@ public class CustomerDetailBean {
             customer = customerRepository.find(customerId);
             customerRepository.close();
         }
-        }
+
+        EmployeeRepository employeeRepository = new EmployeeRepository();
+        employeeList = employeeRepository.list();
+        employeeRepository.close();
         
-            CustomerRepository customerRepository = new CustomerRepository();
-            customer = customerRepository.find(customerId);
-            customerRepository.close();
+       HashTagRepository hashTagRepository = new HashTagRepository();
+        hashTagList = hashTagRepository.list();
+        hashTagRepository.close();
         
     }
     
@@ -210,13 +215,21 @@ public class CustomerDetailBean {
         if (request.getParameter("customerId") != null) {
             customerId = Long.parseLong(request.getParameter("customerId"));
         }
-        System.out.println("Secilen Çalışan kimligi " + selectedEmployeeId);
+        System.out.println("Secilen Müşteri Temsilcisi kimligi " + selectedEmployeeId);
         if (selectedEmployeeId != 0) {
 
             EmployeeRepository employeeRepository = new EmployeeRepository();
             Employee employee = employeeRepository.find(selectedEmployeeId);
             employeeRepository.close();
             customer.setEmployee(employee);
+        }
+        System.out.println("Secilen Etiketler " + selectedHashTagId);
+        if (selectedHashTagId != 0) {
+
+            HashTagRepository hashTagRepository = new HashTagRepository();
+            HashTag hashTag = hashTagRepository.find(selectedHashTagId);
+            hashTagRepository.close();
+            customer.setHashTag(hashTag);
         }
         
         CustomerRepository customerRepository = new CustomerRepository();

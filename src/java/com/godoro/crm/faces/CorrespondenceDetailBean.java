@@ -189,8 +189,8 @@ public class CorrespondenceDetailBean {
             correspondence.setContact(contact);
         }
         
-        System.out.println("Secilen Etiketler " + selectedCustomerId);
-        if (selectedCustomerId != 0) {
+        System.out.println("Secilen Etiketler " + selectedHashTagId);
+        if (selectedHashTagId != 0) {
 
             HashTagRepository hashTagRepository = new HashTagRepository();
             HashTag hashTag = hashTagRepository.find(selectedHashTagId);
