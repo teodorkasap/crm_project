@@ -15,6 +15,7 @@ import com.godoro.crm.repository.ContactRepository;
 import com.godoro.crm.repository.CorrespondenceRepository;
 import com.godoro.crm.repository.CustomerRepository;
 import com.godoro.crm.repository.EmployeeRepository;
+import com.godoro.crm.repository.HashTagRepository;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
@@ -120,13 +121,14 @@ public class CorrespondenceDetailBean {
     public CorrespondenceDetailBean() {
         
         
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-    
+        HttpServletRequest request = (HttpServletRequest) FacesContext
+                .getCurrentInstance().getExternalContext().getRequest();
+
         long correspondenceId = 0;
         if (request.getParameter("correspondenceId") != null) {
             correspondenceId = Long.parseLong(request.getParameter("correspondenceId"));
-        }else{
-            if (correspondenceId == 0) {
+        }
+        if (correspondenceId == 0) {
             correspondence = new Correspondence();
 
         } else {
@@ -134,11 +136,22 @@ public class CorrespondenceDetailBean {
             correspondence = correspondenceRepository.find(correspondenceId);
             correspondenceRepository.close();
         }
-        }
+
+        EmployeeRepository employeeRepository = new EmployeeRepository();
+        employeeList = employeeRepository.list();
+        employeeRepository.close();
         
-            CorrespondenceRepository correspondenceRepository = new CorrespondenceRepository();
-            correspondence = correspondenceRepository.find(correspondenceId);
-            correspondenceRepository.close();
+        ContactRepository contactRepository=new ContactRepository();
+        contactList=contactRepository.list();
+        contactRepository.close();
+        
+        CustomerRepository customerRepository=new CustomerRepository();
+        customerList=customerRepository.list();
+        customerRepository.close();
+        
+        HashTagRepository hashTagRepository = new HashTagRepository();
+        hashTagList = hashTagRepository.list();
+        hashTagRepository.close();
         
         
     }
@@ -151,7 +164,7 @@ public class CorrespondenceDetailBean {
         if (request.getParameter("correspondenceId") != null) {
             correspondenceId = Long.parseLong(request.getParameter("correspondenceId"));
         }
-        System.out.println("Secilen Okul kimligi " + selectedEmployeeId);
+        System.out.println("Secilen Müşteri Temsilcisi kimligi " + selectedEmployeeId);
         if (selectedEmployeeId != 0) {
 
             EmployeeRepository employeeRepository = new EmployeeRepository();
@@ -159,7 +172,7 @@ public class CorrespondenceDetailBean {
             employeeRepository.close();
             correspondence.setEmployee(employee);
         }
-        System.out.println("Secilen Sinif kimligi " + selectedCustomerId);
+        System.out.println("Seçilen Müşteri kimligi " + selectedCustomerId);
         if (selectedCustomerId != 0) {
 
             CustomerRepository customerRepository = new CustomerRepository();
@@ -167,13 +180,22 @@ public class CorrespondenceDetailBean {
             customerRepository.close();
             correspondence.setCustomer(customer);
         }
-        System.out.println("Secilen Sinif kimligi " + selectedContactId);
+        System.out.println("Secilen Müşteri Kontağı kimligi " + selectedContactId);
         if (selectedContactId != 0) {
 
             ContactRepository contactRepository = new ContactRepository();
             Contact contact = contactRepository.find(selectedContactId);
             contactRepository.close();
             correspondence.setContact(contact);
+        }
+        
+        System.out.println("Secilen Etiketler " + selectedCustomerId);
+        if (selectedCustomerId != 0) {
+
+            HashTagRepository hashTagRepository = new HashTagRepository();
+            HashTag hashTag = hashTagRepository.find(selectedHashTagId);
+            hashTagRepository.close();
+            correspondence.setHashTag(hashTag);
         }
         CorrespondenceRepository correspondenceRepository = new CorrespondenceRepository();
         if (correspondenceId == 0) {
