@@ -156,25 +156,23 @@ public class HashTagDetailBean {
      */
     public HashTagDetailBean() {
         
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-    
+        HttpServletRequest request = (HttpServletRequest) FacesContext
+                .getCurrentInstance().getExternalContext().getRequest();
+
         long hashtagId = 0;
         if (request.getParameter("hashtagId") != null) {
             hashtagId = Long.parseLong(request.getParameter("hashtagId"));
-        }else{
-            if (hashtagId == 0) {
+        }
+        if (hashtagId == 0) {
             hashTag = new HashTag();
 
         } else {
-            HashTagRepository hashtagRepository = new HashTagRepository();
-            hashTag = hashtagRepository.find(hashtagId);
-            hashtagRepository.close();
+            HashTagRepository hashTagRepository = new HashTagRepository();
+            hashTag = hashTagRepository.find(hashtagId);
+            hashTagRepository.close();
         }
-        }
+
         
-            HashTagRepository hashtagRepository = new HashTagRepository();
-            hashTag = hashtagRepository.find(hashtagId);
-            hashtagRepository.close();
         
     }
     

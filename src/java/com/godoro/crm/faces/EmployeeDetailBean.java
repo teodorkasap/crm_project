@@ -9,12 +9,14 @@ package com.godoro.crm.faces;
 import com.godoro.crm.entity.Customer;
 import com.godoro.crm.entity.Employee;
 import com.godoro.crm.entity.Event;
+import com.godoro.crm.entity.HashTag;
 import com.godoro.crm.entity.Participant;
 import com.godoro.crm.entity.Product;
 import com.godoro.crm.entity.Project;
 import com.godoro.crm.entity.User;
 import com.godoro.crm.repository.CustomerRepository;
 import com.godoro.crm.repository.EmployeeRepository;
+import com.godoro.crm.repository.HashTagRepository;
 import com.godoro.crm.repository.UserRepository;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -40,6 +42,8 @@ public class EmployeeDetailBean {
     private long selectedProjectId;
     private List<User> userList;
     private long selectedUserId;
+    private List<HashTag> hashTagList;
+    private long selectedHashTagId;
     
 
     public Employee getEmployee() {
@@ -137,13 +141,14 @@ public class EmployeeDetailBean {
      */
     public EmployeeDetailBean() {
         
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-    
+        HttpServletRequest request = (HttpServletRequest) FacesContext
+                .getCurrentInstance().getExternalContext().getRequest();
+
         long employeeId = 0;
         if (request.getParameter("employeeId") != null) {
             employeeId = Long.parseLong(request.getParameter("employeeId"));
-        }else{
-            if (employeeId == 0) {
+        }
+        if (employeeId == 0) {
             employee = new Employee();
 
         } else {
@@ -151,11 +156,14 @@ public class EmployeeDetailBean {
             employee = employeeRepository.find(employeeId);
             employeeRepository.close();
         }
-        }
+
+        UserRepository userRepository = new UserRepository();
+        userList = userRepository.list();
+        userRepository.close();
         
-            EmployeeRepository employeeRepository = new EmployeeRepository();
-            employee = employeeRepository.find(employeeId);
-            employeeRepository.close();
+        HashTagRepository hashtagRepository=new HashTagRepository();
+        hashTagList=hashtagRepository.list();
+        hashtagRepository.close();
     }
     
     public void save() {
@@ -167,14 +175,23 @@ public class EmployeeDetailBean {
         if (request.getParameter("employeeId") != null) {
             employeeId = Long.parseLong(request.getParameter("employeeId"));
         }
-        System.out.println("Secilen Okul kimligi " + selectedUserId);
+        System.out.println("Seçilen Kullanıcı Hesabı" + selectedUserId);
         if (selectedUserId != 0) {
 
             UserRepository userRepository = new UserRepository();
             User user = userRepository.find(selectedUserId);
             userRepository.close();
             employee.setUser(user);
+        }
         
+        System.out.println("Secilen Etiketler " + selectedHashTagId);
+        if (selectedHashTagId != 0) {
+
+            HashTagRepository hashTagRepository = new HashTagRepository();
+            HashTag hashTag = hashTagRepository.find(selectedHashTagId);
+            hashTagRepository.close();
+            employee.setHashTag(hashTag);
+        }
         EmployeeRepository employeeRepository = new EmployeeRepository();
         if (employeeId == 0) {
             employeeRepository.persist(employee);
@@ -186,4 +203,4 @@ public class EmployeeDetailBean {
     } 
         
     
-}
+

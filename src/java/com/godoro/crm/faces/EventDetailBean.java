@@ -13,7 +13,9 @@ import com.godoro.crm.entity.Event;
 import com.godoro.crm.entity.HashTag;
 import com.godoro.crm.entity.Location;
 import com.godoro.crm.entity.Participant;
+import com.godoro.crm.repository.CustomerRepository;
 import com.godoro.crm.repository.EventRepository;
+import com.godoro.crm.repository.HashTagRepository;
 import com.godoro.crm.repository.LocationRepository;
 import com.godoro.crm.repository.ParticipantRepository;
 import java.util.List;
@@ -126,13 +128,14 @@ public class EventDetailBean {
     public EventDetailBean() {
         
         
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-    
+        HttpServletRequest request = (HttpServletRequest) FacesContext
+                .getCurrentInstance().getExternalContext().getRequest();
+
         long eventId = 0;
         if (request.getParameter("eventId") != null) {
             eventId = Long.parseLong(request.getParameter("eventId"));
-        }else{
-            if (eventId == 0) {
+        }
+        if (eventId == 0) {
             event = new Event();
 
         } else {
@@ -140,11 +143,22 @@ public class EventDetailBean {
             event = eventRepository.find(eventId);
             eventRepository.close();
         }
-        }
+
+        CustomerRepository customerRepository = new CustomerRepository();
+        customerList = customerRepository.list();
+        customerRepository.close();
         
-            EventRepository eventRepository = new EventRepository();
-            event = eventRepository.find(eventId);
-            eventRepository.close();
+        LocationRepository locationRepository=new LocationRepository();
+        locationList=locationRepository.list();
+        locationRepository.close();
+        
+        HashTagRepository hashtagRepository=new HashTagRepository();
+        hashTagList=hashtagRepository.list();
+        hashtagRepository.close();
+        
+        ParticipantRepository participantRepository=new ParticipantRepository();
+        participantList=participantRepository.list();
+        participantRepository.close();
         
         
     }
@@ -159,7 +173,7 @@ public class EventDetailBean {
         if (request.getParameter("eventId") != null) {
             eventId = Long.parseLong(request.getParameter("eventId"));
         }
-        System.out.println("Secilen Toplanti Yeri kimligi " + selectedLocationId);
+        System.out.println("Seçilen Toplanti Yeri kimligi " + selectedLocationId);
         if (selectedLocationId != 0) {
 
             LocationRepository locationRepository = new LocationRepository();
@@ -167,13 +181,30 @@ public class EventDetailBean {
             locationRepository.close();
             event.setLocation(location);
         }
-         System.out.println("Secilen Toplanti Katilimci kimligi " + selectedParticipantId);
+         System.out.println("Seçilen Toplanti Katilimci kimligi " + selectedParticipantId);
         if (selectedParticipantId != 0) {
 
             ParticipantRepository participantRepository = new ParticipantRepository();
             Participant participant = participantRepository.find(selectedParticipantId);
             participantRepository.close();
             event.setParticipant(participant);
+        }
+         System.out.println("Seçilen Müşteri kimliği" + selectedParticipantId);
+        if (selectedParticipantId != 0) {
+
+            ParticipantRepository participantRepository = new ParticipantRepository();
+            Participant participant = participantRepository.find(selectedParticipantId);
+            participantRepository.close();
+            event.setParticipant(participant);
+        }
+        
+        System.out.println("Secilen Etiketler " + selectedHashTagId);
+        if (selectedHashTagId != 0) {
+
+            HashTagRepository hashTagRepository = new HashTagRepository();
+            HashTag hashTag = hashTagRepository.find(selectedHashTagId);
+            hashTagRepository.close();
+            event.setHashTag(hashTag);
         }
         
         EventRepository eventRepository = new EventRepository();
