@@ -6,6 +6,8 @@
 
 package com.godoro.crm.entity;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -32,8 +35,8 @@ public class UserRole {
     private boolean employeeRole;
     @Column(name="managerRole", nullable = false)
     private boolean managerRole;
-    @ManyToOne @JoinColumn(name= "userId")
-    private User user;
+    @OneToMany(mappedBy = "userRole", cascade = CascadeType.ALL)
+    private List<User> userList;
 
     public long getUserRoleId() {
         return userRoleId;
@@ -67,13 +70,15 @@ public class UserRole {
         this.managerRole = managerRole;
     }
 
-    public User getUser() {
-        return user;
+    public List<User> getUserList() {
+        return userList;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
     }
+
+
     
     
     

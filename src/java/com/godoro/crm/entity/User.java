@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -33,27 +35,31 @@ public class User {
     private String userPassword;
     @Column(name="userEmail")
     private String userEmail;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<UserRole> userRoleList;
+    @ManyToOne @JoinColumn(name= "userRoleId")
+    private UserRole userRole;
     
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Employee> employeeList;
+    @ManyToOne @JoinColumn(name= "employeeId")
+    private Employee employee;
 
-    public List<UserRole> getUserRoleList() {
-        return userRoleList;
+    public UserRole getUserRole() {
+        return userRole;
     }
 
-    public void setUserRoleList(List<UserRole> userRoleList) {
-        this.userRoleList = userRoleList;
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 
-    public List<Employee> getEmployeeList() {
-        return employeeList;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setEmployeeList(List<Employee> employeeList) {
-        this.employeeList = employeeList;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
+
+
+
+
     
     
 

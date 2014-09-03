@@ -46,8 +46,8 @@ public class Employee {
     private List<Project> projectList;
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     private List<Participant> participantList;
-    @ManyToOne @JoinColumn(name= "userId")
-    private User user;
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    private List<User> userList;
     
     @ManyToOne @JoinColumn(name= "hashTagId")
     private HashTag hashTag;
@@ -59,16 +59,18 @@ public class Employee {
     public void setHashTag(HashTag hashTag) {
         this.hashTag = hashTag;
     }
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
     
     
 
-    public User getUser() {
-        return user;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     
     

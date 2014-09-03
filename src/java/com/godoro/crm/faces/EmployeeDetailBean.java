@@ -157,9 +157,7 @@ public class EmployeeDetailBean {
             employeeRepository.close();
         }
 
-        UserRepository userRepository = new UserRepository();
-        userList = userRepository.list();
-        userRepository.close();
+        
         
         HashTagRepository hashtagRepository=new HashTagRepository();
         hashTagList=hashtagRepository.list();
@@ -175,14 +173,7 @@ public class EmployeeDetailBean {
         if (request.getParameter("employeeId") != null) {
             employeeId = Long.parseLong(request.getParameter("employeeId"));
         }
-        System.out.println("Seçilen Kullanıcı Hesabı" + selectedUserId);
-        if (selectedUserId != 0) {
-
-            UserRepository userRepository = new UserRepository();
-            User user = userRepository.find(selectedUserId);
-            userRepository.close();
-            employee.setUser(user);
-        }
+        
         
         System.out.println("Secilen Etiketler " + selectedHashTagId);
         if (selectedHashTagId != 0) {
