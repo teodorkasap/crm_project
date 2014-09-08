@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.godoro.crm.faces;
 
 import com.godoro.crm.entity.Contact;
@@ -27,7 +26,7 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 @RequestScoped
 public class ContactSummaryBean {
-    
+
     private List<Contact> contactList;
     private List<Customer> customerList;
     private long selectedCustomerId;
@@ -45,8 +44,6 @@ public class ContactSummaryBean {
     public void setContactList(List<Contact> contactList) {
         this.contactList = contactList;
     }
-    
-    
 
     public List<Customer> getCustomerList() {
         return customerList;
@@ -111,13 +108,12 @@ public class ContactSummaryBean {
     public void setSelectedParticipantId(long selectedParticipantId) {
         this.selectedParticipantId = selectedParticipantId;
     }
-    
-    
+
     /**
      * Creates a new instance of ContactSummaryBean
      */
     public ContactSummaryBean() {
-        
+
         ContactRepository contactRepository = new ContactRepository();
         contactList = contactRepository.list();
         contactRepository.close();
@@ -129,38 +125,51 @@ public class ContactSummaryBean {
         HashTagRepository hashTagRepository = new HashTagRepository();
         hashTagList = hashTagRepository.list();
         hashTagRepository.close();
-        
+
         CorrespondenceRepository correspondenceRepository = new CorrespondenceRepository();
         correspondenceList = correspondenceRepository.list();
         correspondenceRepository.close();
-        
+
         ParticipantRepository participantRepository = new ParticipantRepository();
         participantList = participantRepository.list();
         participantRepository.close();
-        
+
     }
-    
-    
+
     public void filter() {
-        System.out.println("Secilen Okul kimligi " + selectedCustomerId);
+        System.out.println("Secilen Musteri kimligi " + selectedCustomerId);
         if (selectedCustomerId != 0) {
             ContactRepository contactRepository = new ContactRepository();
             contactList = contactRepository.listByCustomerId(selectedCustomerId);
             contactRepository.close();
 
         } else {
-            if (selectedRoomId != 0) {
+            if (selectedHashTagId != 0) {
                 ContactRepository contactRepository = new ContactRepository();
-                contactList = contactRepository.listByRoomId(selectedRoomId);
+                contactList = contactRepository.listByHashTagId(selectedHashTagId);
                 contactRepository.close();
             } else {
+                if (selectedCorrespondenceId != 0) {
+                    ContactRepository contactRepository = new ContactRepository();
+                    contactList = contactRepository.listByCorrespondenceId(selectedCorrespondenceId);
+                    contactRepository.close();
 
-                ContactRepository contactRepository = new ContactRepository();
-                contactList = contactRepository.list();
-                contactRepository.close();
+                } else {
+                    if (selectedParticipantId != 0) {
+                        ContactRepository contactRepository = new ContactRepository();
+                        contactList = contactRepository.listByParticipantId(selectedParticipantId);
+                        contactRepository.close();
+
+                    } else {
+
+                        ContactRepository contactRepository = new ContactRepository();
+                        contactList = contactRepository.list();
+                        contactRepository.close();
+                    }
+                }
+
             }
         }
+    }
 
     }
-    
-}
