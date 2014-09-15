@@ -165,7 +165,7 @@ public class CorrespondenceSummaryBean {
                         if (selectedContactId != 0) {
 
                             CorrespondenceRepository correspondenceRepository = new CorrespondenceRepository();
-                            correspondenceList = correspondenceRepository.listByContactId(selectedCustomerId);
+                            correspondenceList = correspondenceRepository.listByContactId(selectedContactId);
                             correspondenceRepository.close();
                         } else {
 
