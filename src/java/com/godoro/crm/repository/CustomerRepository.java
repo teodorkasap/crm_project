@@ -27,32 +27,32 @@ public class CustomerRepository extends BaseRepository<Customer>{
     }
     
     public List<Customer> listByEmployeeId(long employeeId){
-        String string="select contact from Contact as contact "
-                + " where contact.employee.employeeId = :employeeId";
+        String string="select customer from Customer as customer "
+                + " where customer.employee.employeeId = :employeeId";
         Query query=entityManager.createQuery(string);
         query.setParameter("employeeId",employeeId);
         return query.getResultList();
     }
     
     public List<Customer> listByHashTagId(long hashTagId){
-        String string="select contact from Contact as contact "
-                + " where contact.hashTag.hashTagId = :hashTagId";
+        String string="select customer from Customer as customer "
+                + " where customer.hashTag.hashTagId = :hashTagId";
         Query query=entityManager.createQuery(string);
         query.setParameter("hashTagId",hashTagId);
         return query.getResultList();
     }
     
     public List<Customer> listByProductId(long productId){
-        String string="select contact from Contact as contact "
-                + " where contact.employee.employeeId = :employeeId";
+        String string="select customer from Customer as customer "
+                + " where customer.product.productId = :productId";
         Query query=entityManager.createQuery(string);
-        query.setParameter("employeeId",productId);
+        query.setParameter("productId",productId);
         return query.getResultList();
     }
     
     public List<Customer> listByContactId(long contactId){
-        String string="select contact from Contact as contact "
-                + " where contact.contact.contactId = :contactId";
+        String string="select customer from Custoemr as customer "
+                + " where customer.contact.contactId = :contactId";
         Query query=entityManager.createQuery(string);
         query.setParameter("contactId",contactId);
         return query.getResultList();

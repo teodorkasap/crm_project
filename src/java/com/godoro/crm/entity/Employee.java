@@ -49,6 +49,10 @@ public class Employee {
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     private List<User> userList;
     
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    private List<Correspondence> correspondenceList;
+    
+    
     @ManyToOne @JoinColumn(name= "hashTagId")
     private HashTag hashTag;
 

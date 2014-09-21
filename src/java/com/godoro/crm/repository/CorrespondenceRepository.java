@@ -41,16 +41,16 @@ public class CorrespondenceRepository extends BaseRepository<Correspondence>{
     }
     
     public List<Correspondence> listByEmployeeId(long employeeId){
-        String string="select contact from Contact as contact "
-                + " where contact.employee.employeeId = :employeeId";
+        String string="select correspondence from Correspondence as correspondence "
+                + " where correspondence.employee.employeeId = :employeeId";
         Query query=entityManager.createQuery(string);
         query.setParameter("employeeId",employeeId);
         return query.getResultList();
     }
     
     public List<Correspondence> listByContactId(long contactId){
-        String string="select contact from Contact as contact "
-                + " where contact.contact.contactId = :contactId";
+        String string="select correspondence from Correspondence as correspondence "
+                + " where correspondence.contact.contactId = :contactId";
         Query query=entityManager.createQuery(string);
         query.setParameter("contactId",contactId);
         return query.getResultList();

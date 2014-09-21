@@ -52,6 +52,8 @@ public class Correspondence {
     @ManyToOne
     @JoinColumn(name = "hashTagId")
     private HashTag hashTag;
+    
+    
 
     public Contact getContact() {
         return contact;
