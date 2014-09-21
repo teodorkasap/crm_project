@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.godoro.crm.faces;
 
 import com.godoro.crm.entity.Contact;
@@ -33,7 +32,7 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 @RequestScoped
 public class HashTagSummaryBean {
-    
+
     private List<HashTag> hashTagList;
     private List<Customer> customerList;
     private long selectedCustomerId;
@@ -169,17 +168,13 @@ public class HashTagSummaryBean {
     public void setSelectedEventId(long selectedEventId) {
         this.selectedEventId = selectedEventId;
     }
-    
-    
-    
-    
 
     /**
      * Creates a new instance of HashTagSummaryBean
      */
     public HashTagSummaryBean() {
-        
-            CorrespondenceRepository correspondenceRepository = new CorrespondenceRepository();
+
+        CorrespondenceRepository correspondenceRepository = new CorrespondenceRepository();
         correspondenceList = correspondenceRepository.list();
         correspondenceRepository.close();
 
@@ -198,22 +193,21 @@ public class HashTagSummaryBean {
         ContactRepository contactRepository = new ContactRepository();
         contactList = contactRepository.list();
         contactRepository.close();
-        
+
         ProductRepository productRepository = new ProductRepository();
         productList = productRepository.list();
         productRepository.close();
-        
+
         ProjectRepository projectRepository = new ProjectRepository();
         projectList = projectRepository.list();
         projectRepository.close();
-        
+
         EventRepository eventRepository = new EventRepository();
         eventList = eventRepository.list();
         eventRepository.close();
-        
+
     }
-    
-    
+
     public void filter() {
         System.out.println("Secilen Musteri kimligi " + selectedCustomerId);
         if (selectedCustomerId != 0) {
@@ -221,49 +215,42 @@ public class HashTagSummaryBean {
             hashTagList = hashTagRepository.listByCustomerId(selectedCustomerId);
             hashTagRepository.close();
 
-        
+        } else {
+            if (selectedEmployeeId != 0) {
+                HashTagRepository hashTagRepository = new HashTagRepository();
+                hashTagList = hashTagRepository.listByEmployeeId(selectedEmployeeId);
+                hashTagRepository.close();
+
             } else {
-                if (selectedEmployeeId != 0) {
+
+                if (selectedContactId != 0) {
+
                     HashTagRepository hashTagRepository = new HashTagRepository();
-                    hashTagList = hashTagRepository.listByEmployeeId(selectedEmployeeId);
+                    hashTagList = hashTagRepository.listByContactId(selectedContactId);
                     hashTagRepository.close();
-
                 } else {
+                    if (selectedCorrespondenceId != 0) {
+                        HashTagRepository hashTagRepository = new HashTagRepository();
+                        hashTagList = hashTagRepository.listByCorrespondenceId(selectedCorrespondenceId);
+                        hashTagRepository.close();
+                    } else {
 
-                        if (selectedContactId != 0) {
-
+                        if (selectedEventId != 0) {
                             HashTagRepository hashTagRepository = new HashTagRepository();
-                            hashTagList = hashTagRepository.listByContactId(selectedContactId);
-                            hashTagRepository.close();
-                        } else{ 
-                        if (selectedCorrespondenceId !=0){
-                            HashTagRepository hashTagRepository=new HashTagRepository();
-                            hashTagList = hashTagRepository.listByCorrespondenceId(selectedCorrespondenceId);
-                            hashTagRepository.close();
-                        }else{
-                            
-                        if (selectedEventId !=0) {
-                            HashTagRepository hashTagRepository=new HashTagRepository();
                             hashTagList = hashTagRepository.listByEventId(selectedEventId);
                             hashTagRepository.close();
-                        }
-                        
-                        
-                        
-                        else {
+                        } else {
 
                             HashTagRepository hashTagRepository = new HashTagRepository();
                             hashTagList = hashTagRepository.list();
                             hashTagRepository.close();
                         }
-                        }
-                        }
                     }
-
-                
+                }
             }
-        
+
+        }
 
     }
-    
+
 }
