@@ -137,7 +137,7 @@ public class CorrespondenceSummaryBean {
     }
 
     public void filter() {
-        System.out.println("Secilen Yazisma kimligi " + selectedCustomerId);
+        System.out.println("Secilen Müşteri kimligi " + selectedCustomerId);
         if (selectedCustomerId != 0) {
             CorrespondenceRepository correspondenceRepository = new CorrespondenceRepository();
             correspondenceList = correspondenceRepository.listByCustomerId(selectedCustomerId);

@@ -35,6 +35,7 @@ public class Correspondence {
     @ManyToOne
     @JoinColumn(name = "customerId")
     private Customer customer;
+    @ManyToOne
     @JoinColumn(name = "projectId")
     private Project project;
     @Column(name = "correspondenceName", length = 100, nullable = false)
