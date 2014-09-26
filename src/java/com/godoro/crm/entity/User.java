@@ -35,19 +35,14 @@ public class User {
     private String userPassword;
     @Column(name="userEmail")
     private String userEmail;
-    @ManyToOne @JoinColumn(name= "userRoleId")
-    private UserRole userRole;
     
     @ManyToOne @JoinColumn(name= "employeeId")
     private Employee employee;
 
-    public UserRole getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
-    }
+    
+    
+    
+    
 
     public Employee getEmployee() {
         return employee;

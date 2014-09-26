@@ -8,10 +8,10 @@ package com.godoro.crm.faces;
 
 import com.godoro.crm.entity.Employee;
 import com.godoro.crm.entity.User;
-import com.godoro.crm.entity.UserRole;
+
 import com.godoro.crm.repository.EmployeeRepository;
 import com.godoro.crm.repository.UserRepository;
-import com.godoro.crm.repository.UserRoleRepository;
+
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 public class UserDetailBean {
 
     private User user;
-    private List<UserRole> userRoleList;
+    
     private long selectedUserRoleId;
     private List<Employee> employeeList;
     private long selectedEmployeeId;
@@ -41,13 +41,7 @@ public class UserDetailBean {
         this.user = user;
     }
 
-    public List<UserRole> getUserRoleList() {
-        return userRoleList;
-    }
-
-    public void setUserRoleList(List<UserRole> userRoleList) {
-        this.userRoleList = userRoleList;
-    }
+   
 
     public long getSelectedUserRoleId() {
         return selectedUserRoleId;
@@ -100,9 +94,7 @@ public class UserDetailBean {
         employeeList = employeeRepository.list();
         employeeRepository.close();
         
-        UserRoleRepository userRoleRepository=new UserRoleRepository();
-        userRoleList=userRoleRepository.list();
-        userRoleRepository.close();
+       
     }
     
     public void save() {
@@ -122,14 +114,7 @@ public class UserDetailBean {
             employeeRepository.close();
             user.setEmployee(employee);
         }
-        System.out.println("Secilen Sinif kimligi " + selectedUserRoleId);
-        if (selectedUserRoleId != 0) {
-
-            UserRoleRepository userroleRepository = new UserRoleRepository();
-            UserRole userrole = userroleRepository.find(selectedUserRoleId);
-            userroleRepository.close();
-            user.setUserRole(userrole);
-        }
+        
         UserRepository userRepository = new UserRepository();
         if (userId == 0) {
             userRepository.persist(user);
