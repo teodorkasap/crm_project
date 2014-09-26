@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>CRM Programı Kayıt Sayfası</title>
+    </h:head>
+
+    <h:body>
+
+
+
+
+        <p:panel header="Kullanıcı Bilgileri Girin" style="width: 400px">
+            <h:panelGrid columns="1" cellpadding="5">
+
+
+                <h:form>
+                <h:outputLabel value="Kullanici Adi: "/>
+                <h:inputText 
+                    value="#{userRegisterBean.userName}"/>
+                </h:form>
+                <h:form>
+                <h:outputLabel value="Kullanici Email: "/>
+                <h:inputText 
+                    value="#{userRegisterBean.userEmail}"/>
+                </h:form>
+                <h:form>
+                <h:outputLabel 
+                    value="Kullanici Sifre: "/>
+                <h:inputSecret 
+                    value="#{userRegisterBean.userPassword}"/>
+                </h:form>
+                <h:form>
+                <h:outputLabel value="Sifre Tekrari : "/>
+                <h:inputSecret 
+                    value="#{userRegisterBean.passwordConfirmation}"/>
+                </h:form>
+                <h:form>
+                <h:commandButton 
+                    value="Kaydol!" action="#{userRegisterBean.register()}"/>
+
+                </h:form>
+
+
+
+
+            </h:panelGrid>
+
+        </p:panel>
+
+
+
+
+
+
+
+    </h:body>
+</html>
+

@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Şahıs İletişim Detayları Formu</title>
+    </h:head>
+    <h:body>
+        <h1>Müşteri Kontağı Şahıs Detayları Girin</h1>
+                <h:form>
+                    <input type="hidden" name="roomId" 
+                           value="#{contactDetailBean.contact.contactId}"/>
+                    <h:panelGrid>
+                        <h:outputLabel value="Şahıs Kontak Kayıt#: "/>
+                        <h:outputText 
+                            value="#{contactDetailBean.contact.contactId}"/>
+                        <h:outputLabel value="Şahıs Adı: "/>
+                        <h:inputText 
+                            value="#{contactDetailBean.contact.contactName}"/>
+                        <h:outputLabel value="Fırma: "/>
+                        <h:selectOneMenu 
+                            value="#{contactDetailBean.contact.customer}">
+                            <f:selectItem itemValue="0" itemLabel="-- seciniz --"/>
+                            <f:selectItems 
+                                value="#{contactDetailBean.customerList}"
+                                var="customer"
+                                itemValue="#{customer.customerId}"
+                                itemLabel="#{customer.customerName}"
+                                />
+                        </h:selectOneMenu>
+
+
+                        <h:commandButton 
+                            value="Sakla" action="#{contactDetailBean.save()}"/>
+                    </h:panelGrid>
+
+
+                </h:form>
+    </h:body>
+</html>
+
