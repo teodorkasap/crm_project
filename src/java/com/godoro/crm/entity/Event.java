@@ -40,6 +40,9 @@ public class Event {
     @ManyToOne
     @JoinColumn(name = "locationId")
     private Location location;
+    @ManyToOne
+    @JoinColumn(name = "employeeId")
+    private Employee employee;
    
     @ManyToOne
     @JoinColumn(name = "hashTagId")

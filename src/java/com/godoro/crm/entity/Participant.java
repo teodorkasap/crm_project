@@ -31,7 +31,7 @@ public class Participant {
     private long participanttId;
     @Column(name = "participantName", length = 100, nullable = false)
     private String participantName;
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "participant", cascade = CascadeType.ALL)
     private List<Event> eventList;
     @ManyToOne @JoinColumn(name= "customerId")
     private Customer customer;  
