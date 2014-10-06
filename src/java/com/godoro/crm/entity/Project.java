@@ -45,7 +45,7 @@ public class Project {
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private List<Correspondence> correspondenceList;
     @ManyToOne @JoinColumn(name= "hashTagId")
-    private HashTag hashtag;
+    private HashTag hashTag;
 
     public List<Correspondence> getCorrespondenceList() {
         return correspondenceList;
@@ -55,12 +55,12 @@ public class Project {
         this.correspondenceList = correspondenceList;
     }
 
-    public HashTag getHashtag() {
-        return hashtag;
+    public HashTag getHashTag() {
+        return hashTag;
     }
 
-    public void setHashtag(HashTag hashtag) {
-        this.hashtag = hashtag;
+    public void setHashTag(HashTag hashtag) {
+        this.hashTag = hashtag;
     }
 
     
