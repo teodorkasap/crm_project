@@ -2,41 +2,61 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Şahıs İletişim Detayları Formu</title>
     </h:head>
     <h:body>
         <h1>Müşteri Kontağı Şahıs Detayları Girin</h1>
-                <h:form>
-                    <input type="hidden" name="roomId" 
-                           value="#{contactDetailBean.contact.contactId}"/>
-                    <h:panelGrid>
-                        <h:outputLabel value="Şahıs Kontak Kayıt#: "/>
-                        <h:outputText 
-                            value="#{contactDetailBean.contact.contactId}"/>
-                        <h:outputLabel value="Şahıs Adı: "/>
-                        <h:inputText 
-                            value="#{contactDetailBean.contact.contactName}"/>
-                        <h:outputLabel value="Fırma: "/>
-                        <h:selectOneMenu 
-                            value="#{contactDetailBean.contact.customer}">
-                            <f:selectItem itemValue="0" itemLabel="-- seciniz --"/>
-                            <f:selectItems 
-                                value="#{contactDetailBean.customerList}"
-                                var="customer"
-                                itemValue="#{customer.customerId}"
-                                itemLabel="#{customer.customerName}"
-                                />
-                        </h:selectOneMenu>
+        <h:form>
+            <input type="hidden" name="roomId" 
+                   value="#{contactDetailBean.contact.contactId}"/>
+            <p:panelGrid columns="2">
+
+                <p:outputLabel value="Şahıs Kontak Kayıt#: "/>
+                <h:outputText 
+                    value="#{contactDetailBean.contact.contactId}"/>
 
 
-                        <h:commandButton 
-                            value="Sakla" action="#{contactDetailBean.save()}"/>
-                    </h:panelGrid>
+                <p:outputLabel value="Şahıs Adı: "/>
+                <p:inputText 
+                    value="#{contactDetailBean.contact.contactName}"/>
 
 
-                </h:form>
+
+                <p:outputLabel value="Fırma: "/>
+                <p:selectOneMenu 
+                    value="#{contactDetailBean.selectedCustomerId}">
+                    <f:selectItem itemValue="0" itemLabel="seciniz"/>
+                    <f:selectItems 
+                        value="#{contactDetailBean.customerList}"
+                        var="customer"
+                        itemValue="#{customer.customerId}"
+                        itemLabel="#{customer.customerName}"
+                        />
+                </p:selectOneMenu> 
+
+
+                <p:outputLabel value="Adres: "/>
+                <p:inputText 
+                    value="#{contactDetailBean.contact.contactAddress}"/>
+
+                <p:outputLabel value="Etiketler: "/>
+                <p:inputText 
+                    value="#{contactDetailBean.selectedHashTagId}"/>
+
+
+
+                <p:commandButton 
+                    value="Sakla" action="#{contactDetailBean.save()}" ajax="false"/>
+
+            </p:panelGrid>
+
+
+        </h:form>
+
+
     </h:body>
 </html>
 
