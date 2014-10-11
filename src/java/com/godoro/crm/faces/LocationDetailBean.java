@@ -6,13 +6,12 @@
 
 package com.godoro.crm.faces;
 
-import com.godoro.crm.entity.Location;
 import com.godoro.crm.entity.Event;
 import com.godoro.crm.entity.Location;
 import com.godoro.crm.repository.LocationRepository;
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 

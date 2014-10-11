@@ -22,7 +22,7 @@ public class BaseRepository<E> {
     public BaseRepository(Class<E> entityClass) {
         this.entityClass=entityClass;
         entityManager = Persistence
-                .createEntityManagerFactory("CrmProjectPU")
+                .createEntityManagerFactory("CrmProjectPU4")
                 .createEntityManager();
     }
 

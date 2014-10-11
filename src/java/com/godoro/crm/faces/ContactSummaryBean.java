@@ -16,8 +16,9 @@ import com.godoro.crm.repository.CustomerRepository;
 import com.godoro.crm.repository.HashTagRepository;
 import com.godoro.crm.repository.ParticipantRepository;
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+
 
 /**
  *

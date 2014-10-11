@@ -11,8 +11,8 @@ import com.godoro.crm.entity.Location;
 import com.godoro.crm.repository.EventRepository;
 import com.godoro.crm.repository.LocationRepository;
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
 /**
  *

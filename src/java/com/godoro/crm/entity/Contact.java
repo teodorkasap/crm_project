@@ -31,11 +31,11 @@ public class Contact {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "contactId")
     private long contactId;
-    @Column(name = "contactName", length = 100, nullable = false)
+    @Column(name = "contactName", length = 100, nullable = true)
     private String contactName;
-    @Column(name = "contactAddress", length = 500, nullable = false)
+    @Column(name = "contactAddress", length = 500, nullable = true)
     private String contactAddress;
-    @Column(name = "contactTel", length = 100, nullable = false)
+    @Column(name = "contactTel", length = 100, nullable = true)
     private String contactTel;
     @ManyToOne @JoinColumn(name= "hashTagId")
     private HashTag hashTag;
