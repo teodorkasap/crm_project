@@ -17,7 +17,7 @@ import javax.persistence.Query;
  */
 public class BaseRepository<E> {
 
-    private EntityManager entityManager;
+    protected EntityManager entityManager;
     private Class<E> entityClass;
     public BaseRepository(Class<E> entityClass) {
         this.entityClass=entityClass;
@@ -52,6 +52,8 @@ public class BaseRepository<E> {
     public E find(long entityId){
         return entityManager.find(entityClass,entityId);
     }
+    
+    
     
     public void close() {
         entityManager.close();

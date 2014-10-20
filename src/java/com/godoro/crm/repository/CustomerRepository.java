@@ -13,6 +13,8 @@ import com.godoro.crm.entity.Employee;
 import com.godoro.library.database.BaseRepository;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 /**
@@ -21,9 +23,10 @@ import javax.persistence.Query;
  */
 public class CustomerRepository extends BaseRepository<Customer>{
     
-    private EntityManager entityManager;
+
     public CustomerRepository(){
         super(Customer.class);
+        
     }
     
     public List<Customer> listByEmployeeId(long employeeId){
@@ -57,5 +60,44 @@ public class CustomerRepository extends BaseRepository<Customer>{
         query.setParameter("contactId",contactId);
         return query.getResultList();
     }
+
+    public Customer findByCustomerName (String customerName){
+        try{
+            String jpql=" select customer from Customer as customer" +
+               " where customer.customerName = :customerName " ;
+            Query query=entityManager.createQuery(jpql);
+            query.setParameter("customerName", customerName);
+            return (Customer) query.getSingleResult();
+        }catch (NoResultException e){
+           
+           return null;
+       }
+    }
     
+    
+
+   public Customer findByCustomerNamePrefix(String customerNamePrefix){
+
+       try{
+     
+           String jpql=" select customer from Customer as customer" +
+               " where customer.customerName like :customerNamePattern " ;
+           System.out.println(entityManager);
+       Query query=entityManager.createQuery(jpql);
+       query.setParameter("customerNamePattern",customerNamePrefix+"%");
+
+     return (Customer) query.getSingleResult();
+       }
+       catch (NoResultException e){
+           
+           return null;
+       }
+           
+       
+       
+
+
+   }
+
 }
+

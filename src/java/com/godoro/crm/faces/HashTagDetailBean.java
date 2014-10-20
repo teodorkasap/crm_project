@@ -16,8 +16,9 @@ import com.godoro.crm.entity.Tag;
 import com.godoro.crm.repository.CorrespondenceRepository;
 import com.godoro.crm.repository.HashTagRepository;
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
+
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 

@@ -14,16 +14,17 @@ import com.godoro.crm.entity.Participant;
 import com.godoro.crm.repository.ContactRepository;
 import com.godoro.crm.repository.CustomerRepository;
 import com.godoro.crm.repository.HashTagRepository;
+import com.sun.faces.util.CollectionsUtils;
+import static java.rmi.Naming.list;
+import java.util.ArrayList;
+import java.util.Collection;
+import static java.util.Collections.list;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
-/**
- *
- * @author erolerten
- */
 @ManagedBean
 @RequestScoped
 public class ContactDetailBean {
@@ -32,16 +33,22 @@ public class ContactDetailBean {
     private List<HashTag> hashTagList;
     private long selectedHashTagId;
     private List<Customer> customerList;
-    private long selectedCustomerId;
+    private String selectedCustomerName;
+    
     private List<Participant> participantList;
     private long selectedParticpantId;
     private List<Correspondence> correspondenceList;
     private long selectedCorrespondenceId;
-    
-   
 
     
+{
     
+}
+    
+    
+    
+    
+          
 
     public List<Customer> getCustomerList() {
         return customerList;
@@ -51,12 +58,12 @@ public class ContactDetailBean {
         this.customerList = customerList;
     }
 
-    public long getSelectedCustomerId() {
-        return selectedCustomerId;
+    public String getSelectedCustomerName() {
+        return selectedCustomerName;
     }
 
-    public void setSelectedCustomerId(long selectedCustomerId) {
-        this.selectedCustomerId = selectedCustomerId;
+    public void setSelectedCustomerName(String selectedCustomerName) {
+        this.selectedCustomerName = selectedCustomerName;
     }
     
     
@@ -150,27 +157,56 @@ public class ContactDetailBean {
         
         HashTagRepository hashTagRepository = new HashTagRepository();
         hashTagList = hashTagRepository.list();
-        hashTagRepository.close();
-        
-        
+        hashTagRepository.close();              
         
     }
+    
+    public List<String> completeText(String customerNamePrefix) {
+        System.out.println(customerNamePrefix);
+        
+        CustomerRepository customerRepository = new CustomerRepository();
+        Customer customer = customerRepository.findByCustomerNamePrefix(customerNamePrefix);
+        customerRepository.close();
+        
+        List<String> results = new ArrayList<String>();  
+        if (customer!=null){
+        results.add(customer.getCustomerName());
+        
+//        List<String> customerAarray = new ArrayList<String>();
+//               for(String string :customerAarray){
+//                   customerAarray.add(customer.getCustomerName());
+//                   
+//               }
+//            System.out.println(customerAarray);         
+                   
+//        for(String possibleCustomer:customerAarray ){
+//            if(possibleCustomer.toUpperCase().startsWith(customerNamePrefix.toUpperCase())){
+//                results.add(possibleCustomer);
+//            }
+//        }         
+        return results;
+        }
+        return null;
+    }
+    
+    
+    
     public void save() {
         HttpServletRequest request = (HttpServletRequest) FacesContext
                 .getCurrentInstance().getExternalContext().getRequest();
 
         long contactId = 0;
 
-        if (request.getParameter("contactId") != null) {
-            contactId = Long.parseLong(request.getParameter("contactId"));
+        if (request.getParameter("contactName") != null) {
+            contactId = Long.parseLong(request.getParameter("contactName"));
         }
-        System.out.println("Secilen Müşteri kimliği " + selectedCustomerId);
-        if (selectedCustomerId != 0) {
-
+        System.out.println("Secilen Müşteri ismi " + selectedCustomerName);
+        if (selectedCustomerName != null) {
             CustomerRepository customerRepository = new CustomerRepository();
-            Customer customer = customerRepository.find(selectedCustomerId);
+            Customer customer = customerRepository.findByCustomerName(selectedCustomerName);
             customerRepository.close();
             contact.setCustomer(customer);
+        } else {
         }
         
         System.out.println("Secilen Etiketler " + selectedHashTagId);

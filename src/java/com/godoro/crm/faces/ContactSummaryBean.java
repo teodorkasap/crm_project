@@ -54,12 +54,12 @@ public class ContactSummaryBean {
         this.customerList = customerList;
     }
 
-    public long getSelectedcustomerId() {
+    public long getSelectedCustomerId() {
         return selectedCustomerId;
     }
 
-    public void setSelectedcustomerId(long selectedcustomerId) {
-        this.selectedCustomerId = selectedcustomerId;
+    public void setSelectedCustomerId(long selectedCustomerId) {
+        this.selectedCustomerId = selectedCustomerId;
     }
 
     public List<HashTag> getHashTagList() {
@@ -138,7 +138,7 @@ public class ContactSummaryBean {
     }
 
     public void filter() {
-        System.out.println("Secilen Musteri kimligi " + selectedCustomerId);
+        System.out.println("Secilen Musteri ismi " + selectedCustomerId);
         if (selectedCustomerId != 0) {
             ContactRepository contactRepository = new ContactRepository();
             contactList = contactRepository.listByCustomerId(selectedCustomerId);

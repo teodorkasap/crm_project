@@ -18,6 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
+
 /**
  *
  * @author erolerten
@@ -168,5 +170,7 @@ public class Customer {
     public void setProjectList(List<Project> projectList) {
         this.projectList = projectList;
     }
+    
+    
     
 }
