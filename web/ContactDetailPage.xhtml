@@ -8,46 +8,38 @@
         <title>Şahıs İletişim Detayları Formu</title>
     </h:head>
     <h:body>
-        <h1>Müşteri Kontağı Şahıs Detayları Girin</h1>
+        <h1>Müşteri Kontağı Şahıs Detayları Girin</h1><br/>
+        Bu form, bir müşteri firmaya bağlı çalışan şahıs <br/>
+        kayıtlarının sisteme girilmesi içindir.
+        <br/>
+        <br/>
+        Eğer kaydı girilecek olan şahısın bağlı olduğu firma sistemde <br/>
+        kayıtlı değil ise, önce firma bilgilerini giriniz.<br/>
+
+        <br/>
+        <br/>
+
         <h:form>
             <input type="hidden" name="roomId" 
                    value="#{contactDetailBean.contact.contactId}"/>
             <p:panelGrid columns="2">
-
                 <p:outputLabel value="Şahıs Kontak Kayıt#: "/>
                 <h:outputText 
                     value="#{contactDetailBean.contact.contactId}"/>
-
-
                 <p:outputLabel value="Şahıs Adı: "/>
                 <p:inputText 
                     value="#{contactDetailBean.contact.contactName}"/>
-
-
-
-                <p:outputLabel value="Fırma: "/>
-                <p:selectOneMenu 
-                    value="#{contactDetailBean.selectedCustomerId}">
-                    <f:selectItem itemValue="0" itemLabel="seciniz"/>
-                    <f:selectItems 
-                        value="#{contactDetailBean.customerList}"
-                        var="customer"
-                        itemValue="#{customer.customerId}"
-                        itemLabel="#{customer.customerName}"
-                        />
-                </p:selectOneMenu> 
-
-
+               
+                <br/>
+                <p:outputLabel value="Firma Seçin, eğer secenek yoksa 
+                               önce firma kaydı girin:" for="acForce"/>
+                <p:autoComplete id="acForce" forceSelection="true" 
+                                value="#{contactDetailBean.selectedCustomerName}" completeMethod="#{contactDetailBean.completeText}"/>
                 <p:outputLabel value="Adres: "/>
-                <p:inputText 
-                    value="#{contactDetailBean.contact.contactAddress}"/>
-
+                <p:inputText value="#{contactDetailBean.contact.contactAddress}"/>
                 <p:outputLabel value="Etiketler: "/>
                 <p:inputText 
                     value="#{contactDetailBean.selectedHashTagId}"/>
-
-
-
                 <p:commandButton 
                     value="Sakla" action="#{contactDetailBean.save()}" ajax="false"/>
 
