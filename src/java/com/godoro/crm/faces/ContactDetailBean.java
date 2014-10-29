@@ -31,7 +31,7 @@ public class ContactDetailBean {
     
     private Contact contact;
     private List<HashTag> hashTagList;
-    private long selectedHashTagId;
+    private String selectedHashTag;
     private List<Customer> customerList;
     private String selectedCustomerName;
     
@@ -79,12 +79,12 @@ public class ContactDetailBean {
         this.hashTagList = hashTagList;
     }
 
-    public long getSelectedHashTagId() {
-        return selectedHashTagId;
+    public String getSelectedHashTag() {
+        return selectedHashTag;
     }
 
-    public void setSelectedHashTagId(long selectedHashTagId) {
-        this.selectedHashTagId = selectedHashTagId;
+    public void setSelectedHashTag(String selectedHashTag) {
+        this.selectedHashTag = selectedHashTag;
     }
     
     
@@ -172,20 +172,39 @@ public class ContactDetailBean {
         if (customer!=null){
         results.add(customer.getCustomerName());
         
-//        List<String> customerAarray = new ArrayList<String>();
-//               for(String string :customerAarray){
-//                   customerAarray.add(customer.getCustomerName());
-//                   
-//               }
-//            System.out.println(customerAarray);         
-                   
-//        for(String possibleCustomer:customerAarray ){
-//            if(possibleCustomer.toUpperCase().startsWith(customerNamePrefix.toUpperCase())){
-//                results.add(possibleCustomer);
-//            }
-//        }         
+       
         return results;
         }
+        
+        
+        return null;
+    }
+    
+    public List<String> completeTag(String hashTagPrefix) {
+        System.out.println(hashTagPrefix);
+        
+        HashTagRepository hashTagRepository = new HashTagRepository();
+        HashTag hashTag = hashTagRepository.findByHashTagPrefix(hashTagPrefix);
+        
+        
+        List<String> results = new ArrayList<String>();  
+        if (hashTag!=null){
+        results.add(hashTag.getHashTagContent());
+        
+
+        return results;
+        }
+        
+//      
+//        HttpServletRequest request = (HttpServletRequest) FacesContext
+//                .getCurrentInstance().getExternalContext().getRequest();
+//        HashTagRepository hashtagRepository = new HashTagRepository();
+//            hashtagRepository.persist(hashTag);
+//        
+//        hashtagRepository.close();
+//    
+//        System.out.println("yeni etiket eklendi");
+        
         return null;
     }
     
@@ -200,7 +219,7 @@ public class ContactDetailBean {
         if (request.getParameter("contactName") != null) {
             contactId = Long.parseLong(request.getParameter("contactName"));
         }
-        System.out.println("Secilen Müşteri ismi " + selectedCustomerName);
+        System.out.println("Secilen Müşteri ismi: " + selectedCustomerName);
         if (selectedCustomerName != null) {
             CustomerRepository customerRepository = new CustomerRepository();
             Customer customer = customerRepository.findByCustomerName(selectedCustomerName);
@@ -209,14 +228,25 @@ public class ContactDetailBean {
         } else {
         }
         
-        System.out.println("Secilen Etiketler " + selectedHashTagId);
-        if (selectedHashTagId != 0) {
+        System.out.println("Secilen Etiketler: " + selectedHashTag);
+        
+        if (selectedHashTag != null) {
 
             HashTagRepository hashTagRepository = new HashTagRepository();
-            HashTag hashTag = hashTagRepository.find(selectedHashTagId);
+            HashTag hashTag = hashTagRepository.findByHashTagName(selectedHashTag);
+            if (hashTag!=null){
+                contact.setHashTag(hashTag);
+            }else{
+                hashTag = new HashTag();
+                hashTag.setHashTagContent(selectedHashTag);
+                hashTagRepository.persist(hashTag);
+            }
+            hashTagRepository.findByHashTagName(selectedHashTag);
             hashTagRepository.close();
             contact.setHashTag(hashTag);
         }
+    
+        System.out.println("yeni etiket eklendi");
         
         ContactRepository contactRepository = new ContactRepository();
         if (contactId == 0) {

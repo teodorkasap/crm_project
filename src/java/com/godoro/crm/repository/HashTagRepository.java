@@ -7,10 +7,12 @@
 package com.godoro.crm.repository;
 
 import com.godoro.crm.entity.Correspondence;
+import com.godoro.crm.entity.Customer;
 import com.godoro.crm.entity.HashTag;
 import com.godoro.library.database.BaseRepository;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 /**
@@ -18,7 +20,7 @@ import javax.persistence.Query;
  * @author erolerten
  */
 public class HashTagRepository extends BaseRepository<HashTag>{
-    private EntityManager entityManager;
+   
     public HashTagRepository(){
         super(HashTag.class);
     }
@@ -62,5 +64,43 @@ public class HashTagRepository extends BaseRepository<HashTag>{
         query.setParameter("eventId",eventId);
         return query.getResultList();
     }
+    
+    public HashTag findByHashTagName (String hashTagContent){
+        try{
+            String jpql=" select hashTag from HashTag as hashTag" +
+               " where hashTag.hashTagContent = :hashTagContent " ;
+            Query query=entityManager.createQuery(jpql);
+            query.setParameter("hashTagContent", hashTagContent);
+            return (HashTag) query.getSingleResult();
+        }catch (NoResultException e){
+           
+           return null;
+       }
+    }
+    
+    
+
+   public HashTag findByHashTagPrefix(String hashTagPrefix){
+
+       try{
+     
+           String jpql=" select hashTag from HashTag as hashTag" +
+               " where hashTag.hashTagContent like :hashTagContentPattern " ;
+           System.out.println(entityManager);
+       Query query=entityManager.createQuery(jpql);
+       query.setParameter("hashTagContentPattern",hashTagPrefix+"%");
+
+     return (HashTag) query.getSingleResult();
+       }
+       catch (NoResultException e){
+           
+           return null;
+       }
+           
+       
+       
+
+
+   }
     
 }
