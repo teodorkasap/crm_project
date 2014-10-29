@@ -30,7 +30,7 @@
                 <p:inputText 
                     value="#{contactDetailBean.contact.contactName}"/>
                
-                <br/>
+                
                 <p:outputLabel value="Firma Seçin, eğer secenek yoksa 
                                önce firma kaydı girin:" for="acForce"/>
                 <p:autoComplete id="acForce" forceSelection="true" 
@@ -38,8 +38,8 @@
                 <p:outputLabel value="Adres: "/>
                 <p:inputText value="#{contactDetailBean.contact.contactAddress}"/>
                 <p:outputLabel value="Etiketler: "/>
-                <p:inputText 
-                    value="#{contactDetailBean.selectedHashTagId}"/>
+                <p:autoComplete 
+                    value="#{contactDetailBean.selectedHashTag}" completeMethod="#{contactDetailBean.completeTag}"/>
                 <p:commandButton 
                     value="Sakla" action="#{contactDetailBean.save()}" ajax="false"/>
 
